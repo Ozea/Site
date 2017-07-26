@@ -44,14 +44,14 @@
     <link rel='stylesheet'  type='text/css' href="bootstrap.min.css" >
     <title>Login form</title>
     <style type="text/css">
-        .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+        .login h1 { color #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center;  }
         h1 {
             text-align: center;
             color: black;
         }
         body{
             background: #c7b39b url("1.jpg");
-            color: #fff;
+            color: #000000;
         }
 
         .form-wrapper {
