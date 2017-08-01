@@ -91,7 +91,7 @@
         <form method="POST" align="center">
 
             <b>E-mail</b><br/>
-            <input type="text" required name="username" value = <?php echo empty($username1) ? "": $username1; ?> /><br/><br>
+            <input type="text" required name="username" value = "<?php echo empty($username1) ? "": $username1; ?>" /><br/><br>
             <b>Password</b><br/>
             <input type="password" required name="password"/><br/>
             <div class="checkbox">
