@@ -1,38 +1,38 @@
 <?php
     $logged = false;
     $errors = [];
-    function validate ($password) {
+    function PasswordValidation ($PassErrors) {
         $errors = [];
-        if(!preg_match('/^[\w]+$/i', $password)) {
+        if(!preg_match('/^[\w]+$/i', $PassErrors)) {
             $errors[]= "Password includes forbidden symbols";
         }
 
-        if(strlen($password) < 4) {
+        if(strlen($PassErrors) < 4) {
             $errors[]= "Your password should be more than 4 symbols";
         }
-        if(strlen($password) > 20) {
+        if(strlen($PassErrors) > 20) {
             $errors[]= "Your password should be less than 20 symbols";
         }
 
         return $errors;
     }
 
-    function EmailValidation ($username) {
+    function EmailValidation ($EmailErrors) {
         $errors = [];
-        if (!filter_var($username, FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($EmailErrors, FILTER_VALIDATE_EMAIL)){
             $errors[] = "Your email is invalid";
         }
         return $errors;
     }
 
     if(isset($_POST['username'])&&isset($_POST['password'])) {
-        $username = EmailValidation($_POST['username']);
-        $username1 = $_POST['username'];
-        $password = validate($_POST['password']);
-        $password1 = $_POST['password'];
-        $errors = array_merge($username, $password);
+        $EmailErrors = EmailValidation($_POST['username']);
+        $username = $_POST['username'];
+        $PassErrors = PasswordValidation($_POST['password']);
+        $password = $_POST['password'];
+        $errors = array_merge($EmailErrors, $PassErrors);
         if (empty($errors)) {
-            if ($username1 == 'Somemail@mail.ru' && $password1 == 'road_to_web_design1') {
+            if ($username == 'Somemail@mail.ru' && $password == 'road_to_web_design1') {
                 $logged = true;
             } else {
                 echo "Wrong password or username combination!";
@@ -91,7 +91,7 @@
         <form method="POST" align="center">
 
             <b>E-mail</b><br/>
-            <input type="text" required name="username" value = "<?php echo empty($username1) ? "": $username1; ?>" /><br/><br>
+            <input type="text" required name="username" value = "<?php echo empty($username) ? "": $username; ?>" /><br/><br>
             <b>Password</b><br/>
             <input type="password" required name="password"/><br/>
             <div class="checkbox">
