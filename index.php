@@ -1,15 +1,8 @@
 <?php
     $logged = false;
     $errors = [];
-
-
-    /**
-     * @param $password
-     * @return array
-     */
     function validate ($password) {
         $errors = [];
-//        var_dump(preg_match('/^[\w]+$/i', $password));
         if(!preg_match('/^[\w]+$/i', $password)) {
             $errors[]= "Password includes forbidden symbols";
         }
@@ -24,15 +17,25 @@
         return $errors;
     }
 
+    function EmailValidation ($username) {
+        $errors = [];
+        if (!filter_var($username, FILTER_VALIDATE_EMAIL)){
+            $errors[] = "Your email is invalid";
+        }
+        return $errors;
+    }
+
     if(isset($_POST['username'])&&isset($_POST['password'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $errors = validate($password);
+        $username = EmailValidation($_POST['username']);
+        $username1 = $_POST['username'];
+        $password = validate($_POST['password']);
+        $password1 = $_POST['password'];
+        $errors = array_merge($username, $password);
         if (empty($errors)) {
-            if ($username == 'Somemail@mail.ru' && $password == 'road_to_web_design1') {
+            if ($username1 == 'Somemail@mail.ru' && $password1 == 'road_to_web_design1') {
                 $logged = true;
             } else {
-                $error []= "Wrong password and username combination!";
+                echo "Wrong password or username combination!";
             }
         }
     }
@@ -64,12 +67,7 @@
             vertical-align: middle;
             float: none;
         }
-        /*.btn{*/
-            /*border-radius: 5px;*/
-            /*background: rgb(30, 40, 50);*/
-            /*color: white;*/
-            /*width: 100px;*/
-        /*}*/
+
     </style>
 
 </head>
@@ -79,26 +77,7 @@
 <?php if(!$logged): ?> <br>
  <br>
     <?php
-//        if(!empty($errors)){
-//            var_dump($errors);
-//            echo "<p style='color:black'>".$errors."</p>";
-//            echo '<ul>';
-//            for ($i = 0; $i < count($errors); $i++) {
-//                echo "<li style='color:black'>".$errors[$i]."</li>";
-//            }
-//            $i = 0;
-//            while ($i < count($errors)) {
-//                echo "<li style='color:black'>".$errors[$i]."</li>";
-//                $i++;
-//            }
-//            foreach ($errors as $error) {
-//                echo "<li style='color:black'>".$error."</li>";
-//            }
-//            echo '</ul>';
-//        }
-//
-//var_dump($errors);
-//    ?>
+   ?>
     <?php if (!empty($errors)) { ?>
         <ul>
             <?php foreach ($errors as $error1) { ?>
@@ -112,7 +91,7 @@
         <form method="POST" align="center">
 
             <b>E-mail</b><br/>
-            <input type="text" required name="username" /><br/><br>
+            <input type="text" required name="username" value = <?php echo empty($username1) ? "": $username1; ?> /><br/><br>
             <b>Password</b><br/>
             <input type="password" required name="password"/><br/>
             <div class="checkbox">
