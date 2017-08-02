@@ -5,26 +5,26 @@ $(function () {
     var $form = $('form');
     var $errorList = $('#error-list');
     
-    function validatePassword(PasswordErrors) {
+    function validatePassword(password) {
         var $errors = [];
         var regex = /^[\w]+$/i;
-        var valid = regex.exec(PasswordErrors);
+        var valid = regex.exec(password);
         if(!valid) {
             $errors.push('Your password includes forbidden symbols');
         }
-        if(PasswordErrors.length < 4) {
+        if(password.length < 4) {
             $errors.push('Your password should be more than 4 characters long');
         }
-        if(PasswordErrors.length > 20) {
+        if(password.length > 20) {
             $errors.push('Your password should be less than 20 characters long');
         }
         return $errors;
     }
 
-    function validateUsername(EmailErrors) {
+    function validateUsername(username) {
         var $errors = [];
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var valid = re.test(EmailErrors);
+        var valid = re.test(username);
         if(!valid) {
             $errors.push('Your E-mail is invalid');
         }
