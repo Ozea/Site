@@ -21,10 +21,10 @@ $(function () {
         return $errors;
     }
 
-    function validateUsername(email) {
+    function validateUsername(EmailErrors) {
         var $errors = [];
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var valid = re.test(email);
+        var valid = re.test(EmailErrors);
         if(!valid) {
             $errors.push('Your E-mail is invalid');
         }
