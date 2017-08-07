@@ -1,3 +1,4 @@
+<?php include 'logic.php' ;?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,7 +9,6 @@
     <script type="text/javascript" src="scripts.js" ></script>
 </head>
 <body>
-<?php include 'logic.php' ;?>
 <?php if(!$logged): ?> <br>
     <br>
     <?php
