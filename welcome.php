@@ -4,11 +4,29 @@
     <link rel='stylesheet'  type='text/css' href="bootstrap.min.css" >
     <title>Home page</title>
     <link rel='stylesheet'  type='text/css' href="style.css" >
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-    <script type="text/javascript" src="scripts.js" ></script>
+    <style>
+        .button {
+            background-color: #5bc0de;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome, user</h1>
-<h3><a href = "logout.php">Sign Out</a></h3>
+<h1>Welcome!</h1><br><br><br><br><br>
+<div class ="form-wrapper center-block" align="center" >
+<h4>It is fun to learn PHP!</h4><br><br><br>
+<h5>If you do not think so, log out!</h5>
+</div>
+<div>
+    <h3><a href = "logout.php" class="button">Log Out</a></h3>
+</div>
 </body>
-<html/>
+</html>
