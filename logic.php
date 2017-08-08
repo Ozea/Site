@@ -3,7 +3,6 @@ $logged = false;
 $errors = [];
 $username = '';
 $password = '';
-
 function PasswordValidation ($PassErrors) {
     $errors = [];
     if(!preg_match('/^[\w]+$/i', $PassErrors)) {
@@ -28,19 +27,37 @@ function EmailValidation ($EmailErrors) {
     return $errors;
 }
 
-if(isset($_POST['username'])&&isset($_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $EmailErrors = EmailValidation($username);
-    $PassErrors = PasswordValidation($password);
-    $errors = array_merge($EmailErrors, $PassErrors);
-    if (empty($errors)) {
-        if ($username == 'somemail@mail.ru' && $password == 'road_to_web_design1') {
-            $logged = true;
-        } else {
-            echo "Wrong password or username combination!";
-        }
-    }
-}
+    include ("DbConfig.php");
+    session_start();
 
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $password = mysqli_real_escape_string($db, $_POST['password']);
+    $sql = "Select id from users where username = '$username' and password = '$password'";
+    $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $active = $row['active'];
+    $count = mysqli_num_rows($result);
+    $errors = [];
+    if($count == 1) {
+        $_SESSION['username'] = $username;
+        header("location:welcome.php");
+        }else {
+        $errors[] = "Your E-mail or password is invalid";
+            }
+            return $errors;
+
+        $EmailErrors = EmailValidation($username);
+        $PassErrors = PasswordValidation($password);
+        $errors = array_merge($EmailErrors, $PassErrors);
+}
 ?>
+<?php
+require_once 'DbConfig.php';
+$link = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE)
+    or die("Error". mysqli_error($link));
+
+mysqli_close($link);
+?>
+
