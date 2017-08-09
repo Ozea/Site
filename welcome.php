@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(session_status() == PHP_SESSION || empty($_SESSION['username'])) {
+    header("Location: index.php");
+} ?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,7 +25,7 @@
     </style>
 </head>
 <body>
-<h1>Welcome!</h1><br><br><br><br><br>
+    <h1>Welcome!</h1><br><br><br><br><br>
 <div class ="form-wrapper center-block" align="center" >
 <h4>It is fun to learn PHP!</h4><br><br><br>
 <h5>If you do not think so, log out!</h5>
